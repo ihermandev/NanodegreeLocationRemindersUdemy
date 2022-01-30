@@ -38,16 +38,6 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
         longitude.value = poi.latLng.longitude
         selectedPOI.value = poi
         reminderSelectedLocationStr.value = poi.name
-
-    }
-
-    /**
-     * Validate the entered data then saves the reminder data to the DataSource
-     */
-    fun validateAndSaveReminder(reminderData: ReminderDataItem) {
-        if (validateEnteredData(reminderData)) {
-            saveReminder(reminderData)
-        }
     }
 
     /**
@@ -75,7 +65,7 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
     /**
      * Validate the entered data and show error to the user if there's any invalid data
      */
-    fun validateEnteredData(reminderData: ReminderDataItem): Boolean {
+     fun validateEnteredData(reminderData: ReminderDataItem): Boolean {
         if (reminderData.title.isNullOrEmpty()) {
             showSnackBarInt.value = R.string.err_enter_title
             return false
@@ -87,4 +77,5 @@ class SaveReminderViewModel(val app: Application, val dataSource: ReminderDataSo
         }
         return true
     }
+
 }
