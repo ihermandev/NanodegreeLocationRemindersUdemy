@@ -6,15 +6,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion "29.0.2"
+    compileSdkVersion androidCompileSdk
 
     defaultConfig {
         applicationId "com.udacity.project4"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion androidMinSdk
+        targetSdkVersion androidTargetSdk
+        versionCode codeVersion
+        versionName nameVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -78,7 +77,6 @@ dependencies {
     //Koin
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
-
 
     // Dependencies for local unit tests
     testImplementation "junit:junit:$junitVersion"
