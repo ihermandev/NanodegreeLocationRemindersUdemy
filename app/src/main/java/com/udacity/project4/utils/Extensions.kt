@@ -6,6 +6,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -44,6 +45,10 @@ fun Fragment.setDisplayHomeAsUpEnabled(bool: Boolean) {
             bool
         )
     }
+}
+
+fun Fragment.showToast(message: String) {
+    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }
 
 //animate changing the view visibility

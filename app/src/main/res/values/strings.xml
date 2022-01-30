@@ -40,4 +40,7 @@
     <string name="geofence_too_many_geofences">Your app has registered too many geofences.</string>
     <string name="geofence_too_many_pending_intents">You have provided too many PendingIntents to the addGeofences() call.</string>
     <string name="error_adding_geofence">Error Happened, Can\'t Add Geofence</string>
+    <string name="permission_denied_message">The app need location permission in order to detect where you are</string>
+    <string name="poi_not_selected">Select location or POI please</string>
+    <string name="blocked_poi_save_btn">Please grand location permission in your settings</string>
 </resources>
