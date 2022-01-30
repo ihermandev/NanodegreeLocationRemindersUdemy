@@ -1,6 +1,7 @@
 package com.udacity.project4
 
 import android.app.Application
+import com.udacity.project4.locationreminders.ReminderDescriptionViewModel
 import com.udacity.project4.locationreminders.data.ReminderDataSource
 import com.udacity.project4.locationreminders.data.local.LocalDB
 import com.udacity.project4.locationreminders.data.local.RemindersLocalRepository
@@ -31,6 +32,13 @@ class MyApp : Application() {
             single {
                 //This view model is declared singleton to be used across multiple fragments
                 SaveReminderViewModel(
+                    get(),
+                    get() as ReminderDataSource
+                )
+            }
+            single {
+                //This view model is declared singleton to be used across multiple fragments
+                ReminderDescriptionViewModel(
                     get(),
                     get() as ReminderDataSource
                 )

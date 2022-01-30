@@ -151,7 +151,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
 
             val snippet = String.format(
                 Locale.getDefault(),
-                "Lat: %1$.5f, Long: %2$.5f",
+                getString(R.string.lat_long_snippet),
                 latLng.latitude,
                 latLng.longitude
             )

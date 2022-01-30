@@ -39,6 +39,11 @@ class RemindersLocalRepository(
             remindersDao.saveReminder(reminder)
         }
 
+    override suspend fun deleteReminder(reminder: ReminderDTO) =
+        withContext(ioDispatcher) {
+            remindersDao.deleteReminder(reminder)
+        }
+
     /**
      * Get a reminder by its id
      * @param id to be used to get the reminder

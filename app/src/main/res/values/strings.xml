@@ -11,6 +11,7 @@
     <string name="logout">Logout</string>
     <string name="welcome_to_the_location_reminder_app">Welcome to the location reminder app</string>
     <string name="login">Login</string>
+    <string name="remove">Remove Reminder</string>
     <string name="title_activity_maps">Map</string>
     <string name="normal_map">Normal Map</string>
     <string name="hybrid_map">Hybrid Map</string>
@@ -45,4 +46,6 @@
     <string name="poi_not_selected">Select location or POI please</string>
     <string name="blocked_poi_save_btn">Please grand location permission in your settings</string>
     <string name="empty_reminder_data_error">Expected reminder data in null</string>
+    <string name="marker_reminder_details_title">Marker Reminder Details:</string>
+    <string name="geofence_removed">Geofence removed</string>
 </resources>
