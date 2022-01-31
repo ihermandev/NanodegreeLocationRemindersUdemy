@@ -13,7 +13,10 @@ import com.udacity.project4.locationreminders.TestData.testPoi
 import com.udacity.project4.locationreminders.TestData.toReminderData
 import com.udacity.project4.locationreminders.data.FakeDataSource
 import com.udacity.project4.locationreminders.getOrAwaitValue
+import junit.framework.TestCase.assertNotNull
+import junit.framework.TestCase.assertNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.hamcrest.CoreMatchers
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.Is.`is`
 import org.junit.After
@@ -96,5 +99,37 @@ class SaveReminderViewModelTest {
         val value = reminderViewModel.showSnackBarInt.value
 
         assertThat(value, `is`(R.string.err_select_location))
+    }
+
+    @Test
+    fun `check if loading state is changing during reminders saving`() {
+        mainCoroutineRule.pauseDispatcher()
+        // Make the repository return errors.
+        reminderViewModel.saveReminder(testData.toReminderData())
+
+        assertThat(reminderViewModel.showLoading.value, `is`(true))
+
+        mainCoroutineRule.resumeDispatcher()
+
+        assertThat(reminderViewModel.showLoading.value, `is`(false))
+    }
+
+
+    @Test
+    fun `save and clear poi data`() {
+        // Make the repository return errors.
+        reminderViewModel.saveSelectedPoi(testPoi)
+
+        assertNotNull(reminderViewModel.selectedPOI.value)
+        assertNotNull(reminderViewModel.latitude.value)
+        assertNotNull(reminderViewModel.longitude.value)
+        assertNotNull(reminderViewModel.reminderSelectedLocationStr.value)
+
+        reminderViewModel.onClear()
+
+        assertNull(reminderViewModel.selectedPOI.value)
+        assertNull(reminderViewModel.latitude.value)
+        assertNull(reminderViewModel.longitude.value)
+        assertNull(reminderViewModel.reminderSelectedLocationStr.value)
     }
 }

@@ -1,5 +1,3 @@
-@file:Suppress("IllegalIdentifier")
-
 package com.udacity.project4
 
 import android.app.Application
@@ -105,7 +103,7 @@ class RemindersActivityTest :
     }
 
     @Test
-    fun `appropriate snackbar displayed when reminder title is empty`() {
+    fun appropriateSnackbarDisplayedWhenReminderTitleIsEmpty() {
         // Start up Tasks screen
         val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
@@ -119,7 +117,7 @@ class RemindersActivityTest :
     }
 
     @Test
-    fun `appropriate snackbar displayed when reminder title is not empty but location is empty`() {
+    fun appropriateSnackbarDisplayedWhenReminderTitleIsNotEmptyButLocationIsEmpty() {
         // Start up Tasks screen
         val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
@@ -135,7 +133,7 @@ class RemindersActivityTest :
     }
 
     @Test
-    fun `no data label should disappear when reminder added`() = runBlocking {
+    fun noDataLabelShouldDisappearWhenReminderAdded() = runBlocking {
         repository.saveReminder(testData)
         // Start up Tasks screen
         val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
@@ -146,7 +144,7 @@ class RemindersActivityTest :
     }
 
     @Test
-    fun `add marker on the map and save reminder`() {
+    fun addMarkerOnTheMapAndSaveReminder() {
         // Start up Tasks screen
         val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)

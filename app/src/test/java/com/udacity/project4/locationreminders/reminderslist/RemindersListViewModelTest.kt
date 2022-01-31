@@ -14,10 +14,8 @@ import com.udacity.project4.locationreminders.getOrAwaitValue
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.hamcrest.core.Is
+import org.junit.*
 import org.junit.runner.RunWith
 import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
@@ -87,6 +85,28 @@ class RemindersListViewModelTest {
         val value = reminderViewModel.showNoData.value
 
         assertThat(value, `is`(true))
+    }
+
+    @Test
+    fun `check if snackbar appears when an exception caught`() {
+        // Make the repository return errors.
+        reminderDataSource.setReturnError(true)
+        reminderViewModel.loadReminders()
+
+        assertThat(reminderViewModel.showSnackBar.value, `is`("Test exception"))
+    }
+
+    @Test
+    fun `check if loading state is changing during reminders loading`() {
+        mainCoroutineRule.pauseDispatcher()
+        // Make the repository return errors.
+        reminderViewModel.loadReminders()
+
+        assertThat(reminderViewModel.showLoading.value, `is`(true))
+
+        mainCoroutineRule.resumeDispatcher()
+
+        assertThat(reminderViewModel.showLoading.value, `is`(false))
     }
 
 }
