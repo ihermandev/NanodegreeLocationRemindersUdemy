@@ -1,6 +1,3 @@
-@file:Suppress("IllegalIdentifier")
-
-
 package com.udacity.project4.locationreminders.reminderslist
 
 import android.app.Application
@@ -61,7 +58,7 @@ class ReminderListFragmentTest : AutoCloseKoinTest() {
     }
 
     @Test
-    fun `error message appearance in snackbar`() = runBlockingTest {
+    fun errorMessageAppearanceInSnackbar() = runBlockingTest {
         val message = "Test Error"
 
         val scenario =
@@ -74,11 +71,12 @@ class ReminderListFragmentTest : AutoCloseKoinTest() {
 
         viewModel.showSnackBar.postValue(message)
 
-        onView(withText(message)).check(matches(isDisplayed()))
+        onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(matches(withText(message)))
     }
 
     @Test
-    fun `save reminder and display it`() = runBlockingTest {
+    fun saveReminderAndDisplayIt() = runBlockingTest {
         dataSource.saveReminder(testData)
 
         val scenario =
@@ -97,7 +95,7 @@ class ReminderListFragmentTest : AutoCloseKoinTest() {
     }
 
     @Test
-    fun `navigate to SaveReminder screen when fab clicked`() = runBlockingTest {
+    fun navigateToSaveReminderScreenWhenFabClicked() = runBlockingTest {
 
         val scenario =
             launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)

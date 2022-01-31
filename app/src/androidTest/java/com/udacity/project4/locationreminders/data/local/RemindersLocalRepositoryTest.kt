@@ -1,5 +1,3 @@
-@file:Suppress("IllegalIdentifier")
-
 package com.udacity.project4.locationreminders.data.local
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -58,7 +56,7 @@ class RemindersLocalRepositoryTest {
     }
 
     @Test
-    fun `save reminder and retrieve reminder`() = runBlocking {
+    fun saveReminderAndRetrieveReminder() = runBlocking {
         localDataSource.saveReminder(testData)
 
         val result = localDataSource.getReminder(testData.id)
@@ -73,14 +71,14 @@ class RemindersLocalRepositoryTest {
     }
 
     @Test
-    fun `retrieve reminder not Success result when wrong id is passed`() = runBlocking {
+    fun retrieveReminderNotSuccessResultWhenWrongIdIsPassed() = runBlocking {
         val wrongId = "123"
         val result = localDataSource.getReminder(wrongId)
         assertThat(result.succeeded, `is`(false))
     }
 
     @Test
-    fun `save reminders and delete all`() = runBlocking {
+    fun saveRemindersAndDeleteAll() = runBlocking {
         localDataSource.saveReminder(testData)
         localDataSource.saveReminder(testData1)
 

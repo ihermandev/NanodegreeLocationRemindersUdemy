@@ -49,7 +49,7 @@ class RemindersDaoTest {
     }
 
     @Test
-    fun `save ReminderDTO to database and get by ID`() = runBlockingTest {
+    fun saveReminderDTOToDatabaseAndGetByID() = runBlockingTest {
         database.reminderDao().saveReminder(testData)
 
         val loaded = database.reminderDao().getReminderById(testData.id)
@@ -63,7 +63,7 @@ class RemindersDaoTest {
     }
 
     @Test
-    fun `save ReminderDTO to database and delete it`() = runBlockingTest {
+    fun saveReminderDTOToDatabaseAndDeleteIt() = runBlockingTest {
         database.reminderDao().saveReminder(testData)
 
         database.reminderDao().deleteReminder(testData)
@@ -74,7 +74,7 @@ class RemindersDaoTest {
     }
 
     @Test
-    fun `save few ReminderDTO to database and delete all`() = runBlockingTest {
+    fun saveFewReminderDTOToDatabaseAndDeleteAll() = runBlockingTest {
         database.reminderDao().saveReminder(testData)
         database.reminderDao().saveReminder(testData1)
 
@@ -86,7 +86,7 @@ class RemindersDaoTest {
     }
 
     @Test
-    fun `save few ReminderDTO to database`() = runBlockingTest {
+    fun saveFewReminderDTOToDatabase() = runBlockingTest {
         database.reminderDao().saveReminder(testData)
         database.reminderDao().saveReminder(testData1)
 
@@ -96,7 +96,7 @@ class RemindersDaoTest {
     }
 
     @Test
-    fun `get invalid data from database`() = runBlockingTest {
+    fun getInvalidDataFromDatabase() = runBlockingTest {
         database.reminderDao().saveReminder(testData)
         val invalidID = "123"
         val loaded = database.reminderDao().getReminderById(invalidID)
