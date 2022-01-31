@@ -28,6 +28,7 @@ import com.udacity.project4.locationreminders.geofence.GeofenceBroadcastReceiver
 import com.udacity.project4.locationreminders.geofence.GeofenceBroadcastReceiver.Companion.ACTION_GEOFENCE_EVENT
 import com.udacity.project4.locationreminders.geofence.GeofenceBroadcastReceiver.Companion.RADIUS_IN_METRES
 import com.udacity.project4.locationreminders.reminderslist.ReminderDataItem
+import com.udacity.project4.locationreminders.reminderslist.ReminderListFragmentDirections
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import com.udacity.project4.utils.showToast
 import org.koin.android.ext.android.inject
