@@ -20,6 +20,7 @@ import com.udacity.project4.locationreminders.data.local.RemindersLocalRepositor
 import com.udacity.project4.locationreminders.reminderslist.RemindersListViewModel
 import com.udacity.project4.locationreminders.savereminder.SaveReminderViewModel
 import com.udacity.project4.util.DataBindingIdlingResource
+import com.udacity.project4.util.ToastMatcher
 import com.udacity.project4.util.monitorActivity
 import com.udacity.project4.utils.EspressoIdlingResource
 import kotlinx.coroutines.runBlocking
@@ -169,4 +170,27 @@ class RemindersActivityTest :
         activityScenario.close()
     }
 
+    @Test
+    fun saveReminderAndShowToastMessage() {
+        // Start up Tasks screen
+        val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
+        dataBindingIdlingResource.monitorActivity(activityScenario)
+
+        onView(withId(R.id.addReminderFAB)).perform(click())
+        onView(withId(R.id.selectLocation)).perform(click())
+        onView(withId(R.id.map)).perform(longClick())
+        onView(withId(R.id.btn_save)).perform(click())
+
+        onView(withId(R.id.reminderTitle))
+            .perform(ViewActions.typeText("Title"))
+
+        onView(withId(R.id.reminderDescription))
+            .perform(ViewActions.typeText("Description"), ViewActions.closeSoftKeyboard())
+
+        onView(withId(R.id.saveReminder)).perform(click())
+
+        onView(withText(R.string.reminder_saved)).inRoot(ToastMatcher()).check(matches(isDisplayed()))
+
+        activityScenario.close()
+    }
 }
