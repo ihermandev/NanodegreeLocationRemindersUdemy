@@ -27,25 +27,6 @@ class RemindersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminders)
-        observeAuth()
-    }
-
-    private fun observeAuth() {
-        viewModel.authenticationState.observe(this, Observer { authenticationState ->
-            when (authenticationState) {
-                AuthenticationViewModel.AuthenticationState.AUTHENTICATED -> {
-                    Log.i(TAG, "Authenticated")
-                }
-                AuthenticationViewModel.AuthenticationState.UNAUTHENTICATED -> {
-                    Log.i(TAG, "Unauthenticated, redirection to Authentication Screen")
-                    finish()
-                    startActivity(Intent(this, AuthenticationActivity::class.java))
-                }
-                else -> Log.e(
-                    TAG, "New $authenticationState state that doesn't require any UI change"
-                )
-            }
-        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

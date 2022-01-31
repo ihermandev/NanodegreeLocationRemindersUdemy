@@ -48,27 +48,17 @@ class AuthenticationActivity : AppCompatActivity() {
         .setTheme(R.style.AppTheme)
         .build()
 
-    private val animationFadeIn : Animation by lazy {
-        AnimationUtils.loadAnimation(this, R.anim.fade_in)
+    private val animationFadeIn: Animation by lazy {
+        AnimationUtils.loadAnimation(this, R.anim.zoom_in).apply {
+            fillAfter = true
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewModel.authenticationState.observe(this, Observer { authenticationState ->
-            when (authenticationState) {
-                AuthenticationViewModel.AuthenticationState.AUTHENTICATED -> {
-                    Log.i(TAG, "Authenticated")
-                    finish()
-                    startActivity(Intent(this, RemindersActivity::class.java))
-                }
-                AuthenticationViewModel.AuthenticationState.UNAUTHENTICATED -> { }
-                else -> Log.e(
-                    TAG, "New $authenticationState state that doesn't require any UI change"
-                )
-            }
-        })
+        observeAuth()
 
         binding.btnLogin.setOnClickListener {
             signInLauncher.launch(signInIntent)
@@ -76,6 +66,23 @@ class AuthenticationActivity : AppCompatActivity() {
 
         binding.tvWelcome.startAnimation(animationFadeIn)
 
+    }
+
+    private fun observeAuth() {
+        viewModel.authenticationState.observe(this, Observer { authenticationState ->
+            when (authenticationState) {
+                AuthenticationViewModel.AuthenticationState.AUTHENTICATED -> {
+                    Log.i(TAG, "Authenticated")
+                    finish()
+                    startActivity(Intent(this, RemindersActivity::class.java))
+                }
+                AuthenticationViewModel.AuthenticationState.UNAUTHENTICATED -> {
+                }
+                else -> Log.e(
+                    TAG, "New $authenticationState state that doesn't require any UI change"
+                )
+            }
+        })
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
