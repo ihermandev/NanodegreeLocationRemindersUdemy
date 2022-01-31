@@ -16,11 +16,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.snackbar.Snackbar
 import com.udacity.project4.R
 import com.udacity.project4.base.BaseFragment
 import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.databinding.FragmentSelectLocationBinding
 import com.udacity.project4.locationreminders.savereminder.SaveReminderViewModel
+import com.udacity.project4.utils.initLocationSnackBar
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import com.udacity.project4.utils.showToast
 import org.koin.android.ext.android.inject
@@ -35,6 +37,10 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
     private var map: GoogleMap? = null
     private var selectedPoi: PointOfInterest? = null
 
+    private val locationSnackBar: Snackbar by lazy {
+        initLocationSnackBar(binding.container, isBackgroundLocation = false)
+    }
+
     @SuppressLint("MissingPermission")
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -43,7 +49,8 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
             if (isGranted) {
                 map?.isMyLocationEnabled = true
             } else {
-                showToast(getString(R.string.permission_denied_message))
+                // No location access granted.
+                locationPermissionSnackbar()
             }
         }
 
@@ -64,11 +71,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         setDisplayHomeAsUpEnabled(true)
 
         binding.btnSave.setOnClickListener {
-            if (!isPermissionGranted()) {
-                showToast(getString(R.string.blocked_poi_save_btn))
-            } else {
-                onLocationSelected()
-            }
+            onLocationSelected()
         }
         return binding.root
     }
@@ -112,7 +115,7 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
                 map?.isMyLocationEnabled = true
             }
             shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                showToast(getString(R.string.permission_denied_message))
+                locationPermissionSnackbar()
             }
             else -> {
                 requestPermissionLauncher.launch(
@@ -219,6 +222,16 @@ class SelectLocationFragment : BaseFragment(), OnMapReadyCallback {
         } catch (e: Resources.NotFoundException) {
             Log.e(TAG, "Can't find style. Error: ", e)
         }
+    }
+
+
+    private fun locationPermissionSnackbar() {
+        locationSnackBar.show()
+    }
+
+    override fun onDestroy() {
+        locationSnackBar.dismiss()
+        super.onDestroy()
     }
 
     private fun isPermissionGranted(): Boolean {
