@@ -7,6 +7,8 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import com.udacity.project4.TestData.testData
+import com.udacity.project4.TestData.testData1
 import com.udacity.project4.locationreminders.data.dto.ReminderDTO
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNull
@@ -28,22 +30,6 @@ import org.junit.runner.RunWith
 class RemindersDaoTest {
 
     private lateinit var database: RemindersDatabase
-
-    private val testData = ReminderDTO(
-        title = "Title",
-        description = "Description",
-        location = "Warsaw",
-        latitude = 52.228155644591226,
-        longitude = 21.0033821602075540
-    )
-
-    private val testData1 = ReminderDTO(
-        title = "Title",
-        description = "Description",
-        location = "Poland",
-        latitude = 53.228155644591226,
-        longitude = 20.0033821602075540
-    )
 
     // Executes each task synchronously using Architecture Components.
     @get:Rule

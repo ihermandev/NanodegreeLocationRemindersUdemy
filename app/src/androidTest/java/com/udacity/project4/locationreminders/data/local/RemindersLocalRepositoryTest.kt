@@ -7,17 +7,19 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
-import com.udacity.project4.locationreminders.data.dto.ReminderDTO
+import com.udacity.project4.TestData.testData
+import com.udacity.project4.TestData.testData1
 import com.udacity.project4.locationreminders.data.dto.Result
 import com.udacity.project4.locationreminders.data.dto.succeeded
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
-import org.junit.*
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @ExperimentalCoroutinesApi
@@ -28,22 +30,6 @@ class RemindersLocalRepositoryTest {
 
     private lateinit var localDataSource: RemindersLocalRepository
     private lateinit var database: RemindersDatabase
-
-    private val testData = ReminderDTO(
-        title = "Title",
-        description = "Description",
-        location = "Warsaw",
-        latitude = 52.228155644591226,
-        longitude = 21.0033821602075540
-    )
-
-    private val testData1 = ReminderDTO(
-        title = "Title",
-        description = "Description",
-        location = "Poland",
-        latitude = 53.228155644591226,
-        longitude = 20.0033821602075540
-    )
 
     // Executes each task synchronously using Architecture Components.
     @get:Rule
