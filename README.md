@@ -5,6 +5,7 @@ A Todo list app with location reminders that remind the user to do something whe
 
 ### Installation
 
+```
  To enable Google Maps:
     a. Go to APIs & Services at the Google console.
     b. Select your project and go to APIs & Credentials.
@@ -12,4 +13,5 @@ A Todo list app with location reminders that remind the user to do something whe
     d. Add your package name and SHA-1 signing-certificate fingerprint.
     c. Enable Maps SDK for Android from API restrictions and Save.
     d. Copy the api key to the `google_maps_api.xml`
+```
 
